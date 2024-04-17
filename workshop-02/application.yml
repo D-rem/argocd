@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nginx-declarative
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  labels:
+    name: nginx
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/D-rem/argocd.git
+    targetRevision: HEAD
+    path: workshop-02-declarative
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
